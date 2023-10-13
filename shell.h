@@ -12,7 +12,9 @@
 #include <sys/stat.h> /* for use of stat function */
 #include <fcntl.h> /* for open files*/
 #include <signal.h> /* for signal management */
-#include "macros.h" /* for msg help and prompt */
+
+#define PROMPT_MSG "$ "
+#define BUFFER_SIZE 1024
 
 /****STRUCTURES****/
 
@@ -29,15 +31,17 @@
  */
 typedef struct info
 {
-	char *program_name;
+	char *program;
+	char *prompt;
 	char *input_line;
-	char *command_name;
+	char *command;
 	int exec_counter;
-	int file_des;
+	int fd;
+	char *token;
 	char **tokens;
 	char **env;
 	char **alias_list;
-} my_program_info;
+} my_shell_info;
 
 /**
  * struct builtins - struct for the builtins
@@ -47,7 +51,31 @@ typedef struct info
 typedef struct builtins
 {
 	char *builtin;
-	int (*function)(my_program_info *data);
+	int (*function)(my_shell_info *data);
 } builtins;
+
+/*** MAIN FUNCTIONS ***/
+
+/** _getline.c **/
+int _getline(my_shell_info *data);
+int check_logic_ops(char *array_commands[], int i, char array_operators[]);
+
+/** main.c **/
+void handle_ctrl_c(int opr);
+void initialize_data(my_shell_info *data, int argc, char *argv[], char **env);
+void sisifo(char *prompt, my_shell_info *data);
+int main(int argc, char *argv[], char *env[]);
+void free_all_data(my_shell_info *data);
+void free_recurrent_data(my_shell_info *data);
+void free_array_of_pointers(char **directories);
+int _print_error(int errorcode, my_shell_info *data);
+void tokenize(my_shell_info *data);
+int _print_error(int errorcode, my_shell_info *data);
+void expand_variables(my_shell_info *data);
+void expand_alias(my_shell_info *data);
+int execute(my_shell_info *data);
+int _printe(char *string);
+char *str_duplicate(char *string);
+int str_length(char *string);
 
 #endif
