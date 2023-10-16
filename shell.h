@@ -13,7 +13,8 @@
 #include <fcntl.h> /* for open files*/
 #include <signal.h> /* for signal management */
 
-#define PROMPT_MSG "$ "
+#include "macros.h"
+
 #define BUFFER_SIZE 1024
 
 /****STRUCTURES****/
@@ -74,8 +75,69 @@ int _print_error(int errorcode, my_shell_info *data);
 void expand_variables(my_shell_info *data);
 void expand_alias(my_shell_info *data);
 int execute(my_shell_info *data);
-int _printe(char *string);
+int str_length(char *string); 
 char *str_duplicate(char *string);
+
+/** strings.c **/
+int str_compare(char *string1, char *string2, int number);
 int str_length(char *string);
+char *str_duplicate(char *string);
+void str_reverse(char *string);
+char *str_concat(char *string1, char *string2);
+
+/** alias.c **/
+int set_alias(char *alias_string, my_shell_info *data);
+char *get_alias(my_shell_info *data, char *alias);
+int print_alias(my_shell_info *data, char *alias);
+
+/** print.c **/
+int _print(char *string);
+int _printe(char *string); 
+int _print_error(int errorcode, my_shell_info *data);
+
+/** convert_numbers.c **/
+void long_to_string(long number, char *string, int base);
+int _atoi(char *s);
+int count_characters(char *string, char *character);
+
+/** expand.c **/
+void expand_variables(my_shell_info *data);
+void expand_alias(my_shell_info *data);
+int buffer_add(char *buffer, char *str_to_add);
+
+/** manage_env.c **/
+char *env_get_key(char *key, my_shell_info *data);
+int env_set_key(char *key, char *value, my_shell_info *data);
+int env_remove_key(char *key, my_shell_info *data);
+void print_environ(my_shell_info *data);
+
+/** tokenize.c **/
+void tokenize(my_shell_info *data);
+
+/** strtok.c **/
+char *_strtok(char *line, char *delim);
+
+/** execute.c **/
+int execute(my_shell_info *data);
+
+/** builtins_list.c **/
+int builtins_list(my_shell_info *data);
+
+/** builtin_commands.c **/
+int builtin_cd(my_shell_info *data);
+int set_work_directory(my_shell_info *data, char *new_dir);
+int builtin_help(my_shell_info *data);
+int builtin_alias(my_shell_info *data);
+int builtin_exit(my_shell_info *data);
+
+/** builtins_env.c **/
+int builtin_env(my_shell_info *data);
+int builtin_set_env(my_shell_info *data);
+int builtin_unset_env(my_shell_info *data);
+
+/** path.c **/
+int check_file(char *full_path);
+int find_program(my_shell_info *data);
+char **tokenize_path(my_shell_info *data);
 
 #endif

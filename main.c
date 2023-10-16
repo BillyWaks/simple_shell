@@ -6,7 +6,7 @@
  */
 void handle_ctrl_c(int opr)
 {
-	(void)opr; /* Cast opr to void to indicate it's intentionally unused */
+	(void)opr;
 	putchar('\n');
 	fputs(PROMPT_MSG, stdout);
 	fflush(stdout);
