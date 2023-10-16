@@ -40,6 +40,7 @@ typedef struct info
 	int fd;
 	char *token;
 	char **tokens;
+	char ***array;
 	char **env;
 	char **alias_list;
 } my_shell_info;
@@ -62,6 +63,7 @@ int _getline(my_shell_info *data);
 int check_logic_ops(char *array_commands[], int i, char array_operators[]);
 
 /** main.c **/
+void inicialize_data(my_shell_info *data, int argc, char *argv[], char **env);
 void handle_ctrl_c(int opr);
 void initialize_data(my_shell_info *data, int argc, char *argv[], char **env);
 void sisifo(char *prompt, my_shell_info *data);
