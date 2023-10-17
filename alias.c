@@ -1,23 +1,23 @@
 #include "shell.h"
 
 /**
- * print_alias - add, remove or show aliases
- * @data: struct for the program's data
- * @alias: name of the alias to be printed
- * Return: zero if sucess, or other number if its declared in the arguments
+ * alias_print - shows adds and removes aliases
+ * @data: pointer to program's data
+ * @alias: alias to be printed
+ * Return: zero on sucsess
  */
-int print_alias(my_shell_info *data, char *alias)
+int alias_print(my_shell_info *data, char *alias)
 {
-	int i, j, alias_length;
+	int i, j, alias_len;
 	char buffer[250] = {'\0'};
 
 	if (data->alias_list)
 	{
-		alias_length = str_length(alias);
+		alias_len = str_length(alias);
 		for (i = 0; data->alias_list[i]; i++)
 		{
-			if (!alias || (str_compare(data->alias_list[i], alias, alias_length)
-						&&	data->alias_list[i][alias_length] == '='))
+			if (!alias || (str_compare(data->alias_list[i], alias, alias_len)
+						&&	data->alias_list[i][alias_len] == '='))
 			{
 				for (j = 0; data->alias_list[i][j]; j++)
 				{
@@ -38,75 +38,66 @@ int print_alias(my_shell_info *data, char *alias)
 }
 
 /**
- * get_alias - add, remove or show aliases
+ * alias_get - gets aliases
+ * @name: name of the alias requested
  * @data: struct for the program's data
- * @name: name of the requested alias.
- * Return: zero if sucess, or other number if its declared in the arguments
+ * Return: zero on sucess
  */
 char *get_alias(my_shell_info *data, char *name)
 {
-	int i, alias_length;
+	int i, alias_len;
 
-	/* validate the arguments */
 	if (name == NULL || data->alias_list == NULL)
 		return (NULL);
 
-	alias_length = str_length(name);
+	alias_len = str_length(name);
 
 	for (i = 0; data->alias_list[i]; i++)
-	{/* Iterates through the environ and check for coincidence of the varname */
-		if (str_compare(name, data->alias_list[i], alias_length) &&
-				data->alias_list[i][alias_length] == '=')
-		{/* returns the value of the key NAME=  when find it */
-			return (data->alias_list[i] + alias_length + 1);
+	{
+		if (str_compare(name, data->alias_list[i], alias_len) &&
+				data->alias_list[i][alias_len] == '=')
+		{
+			return (data->alias_list[i] + alias_len + 1);
 		}
 	}
-	/* returns NULL if did not find it */
 	return (NULL);
-
 }
 
 /**
- * set_alias - add, or override alias
- * @alias_string: alias to be seted in the form (name='value')
+ * set_alias - sets aliases
+ * @alias_str: alias to be seted in the form (name='value')
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
-int set_alias(char *alias_string, my_shell_info *data)
+int set_alias(char *alias_str, my_shell_info *data)
 {
 	int i, j;
 	char buffer[250] = {'0'}, *temp = NULL;
 
-	/* validate the arguments */
-	if (alias_string == NULL ||  data->alias_list == NULL)
+	if (alias_str == NULL ||  data->alias_list == NULL)
 		return (1);
-	/* Iterates alias to find = char */
-	for (i = 0; alias_string[i]; i++)
-		if (alias_string[i] != '=')
-			buffer[i] = alias_string[i];
+	for (i = 0; alias_str[i]; i++)
+		if (alias_str[i] != '=')
+			buffer[i] = alias_str[i];
 		else
-		{/* search if the value of the alias is another alias */
-			temp = get_alias(data, alias_string + i + 1);
+		{
+			temp = get_alias(data, alias_str + i + 1);
 			break;
 		}
-
-	/* Iterates through the alias list and check for coincidence of the varname */
 	for (j = 0; data->alias_list[j]; j++)
 		if (str_compare(buffer, data->alias_list[j], i) &&
 				data->alias_list[j][i] == '=')
-		{/* if the alias alredy exist */
+		{
 			free(data->alias_list[j]);
 			break;
 		}
-
-	/* add the alias */
 	if (temp)
-	{/* if the alias already exist */
+	{
 		buffer_add(buffer, "=");
 		buffer_add(buffer, temp);
 		data->alias_list[j] = str_duplicate(buffer);
 	}
-	else /* if the alias does not exist */
-		data->alias_list[j] = str_duplicate(alias_string);
+	else
+		data->alias_list[j] = str_duplicate(alias_str);
 	return (0);
 }
