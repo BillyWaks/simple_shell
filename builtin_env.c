@@ -1,41 +1,38 @@
 #include "shell.h"
 
 /**
- * builtin_env - shows the environment where the shell runs
+ * _env - shows the environment where the shell runs
  * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * Return: zero on success
  */
-int builtin_env(my_shell_info *data)
+int _env(my_shell_info *data)
 {
 	int i;
 	char cpname[50] = {'\0'};
-	char *var_copy = NULL;
+	char *var_cpy = NULL;
 
-	/* if not arguments */
 	if (data->tokens[1] == NULL)
 		print_environ(data);
 	else
 	{
 		for (i = 0; data->tokens[1][i]; i++)
-		{/* checks if exists a char = */
+		{
 			if (data->tokens[1][i] == '=')
-			{/* checks if exists a var with the same name and change its value*/
-				/* temporally */
-				var_copy = str_duplicate(env_get_key(cpname, data));
-				if (var_copy != NULL)
+			{
+				var_cpy = str_duplicate(env_get_key(cpname, data));
+				if (var_cpy != NULL)
 					env_set_key(cpname, data->tokens[1] + i + 1, data);
 
-				/* print the environ */
 				print_environ(data);
 				if (env_get_key(cpname, data) == NULL)
-				{/* print the variable if it does not exist in the environ */
+				{
 					_print(data->tokens[1]);
 					_print("\n");
 				}
 				else
-				{/* returns the old value of the var*/
-					env_set_key(cpname, var_copy, data);
-					free(var_copy);
+				{
+					env_set_key(cpname, var_cpy, data);
+					free(var_cpy);
 				}
 				return (0);
 			}
@@ -49,13 +46,12 @@ int builtin_env(my_shell_info *data)
 }
 
 /**
- * builtin_set_env - ..
+ * set_env - sets environment variables
  * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * Return: zero on sucess
  */
-int builtin_set_env(my_shell_info *data)
+int set_env(my_shell_info *data)
 {
-	/* validate args */
 	if (data->tokens[1] == NULL || data->tokens[2] == NULL)
 		return (0);
 	if (data->tokens[3] != NULL)
@@ -64,20 +60,17 @@ int builtin_set_env(my_shell_info *data)
 		perror(data->command);
 		return (5);
 	}
-
 	env_set_key(data->tokens[1], data->tokens[2], data);
-
 	return (0);
 }
 
 /**
- * builtin_unset_env - ..
+ * unset_env - unsets environment variables
  * @data: struct for the program's data'
- * Return: ..
+ * Return: 0 on success
  */
-int builtin_unset_env(my_shell_info *data)
+int unset_env(my_shell_info *data)
 {
-	/* validate args */
 	if (data->tokens[1] == NULL)
 		return (0);
 	if (data->tokens[2] != NULL)
