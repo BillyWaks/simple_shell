@@ -52,10 +52,10 @@ char *_strdup(char *str)
  * _strcmp - compares two strings
  * @str1: first string
  * @str2: second string
- * @number: bytes to be compared
+ * @num: bytes to be compared
  * Return: 1 if the strings are equal similar
  */
-int _strcmp(char *str1, char *str2, int number)
+int _strcmp(char *str1, char *str2, int num)
 {
 	int i;
 
@@ -63,7 +63,7 @@ int _strcmp(char *str1, char *str2, int number)
 		return (1);
 	if (str1 == NULL || str2 == NULL)
 		return (0);
-	if (number == 0)
+	if (num == 0)
 	{
 		if (_strlen(str1) != _strlen(str2))
 			return (0);
@@ -76,7 +76,7 @@ int _strcmp(char *str1, char *str2, int number)
 	}
 	else
 	{
-		for (i = 0; i < number ; i++)
+		for (i = 0; i < num ; i++)
 		{
 			if (str1[i] != str2[i])
 				return (0);
