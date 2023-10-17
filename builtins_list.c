@@ -1,35 +1,28 @@
 #include "shell.h"
 
 /**
- * builtins_list - search for match and execute the  builtin
+ * _builtins - search for match and execute the  builtin
  * @data: struct for the program's data
  * Return: Returns the return of the function executed is there is a match,
  * otherwise returns -1.
  **/
-int builtins_list(my_shell_info *data)
+int _builtins(my_shell_info *data)
 {
-	int iterator;
+	int i;
 	builtins options[] = {
-		{"exit", builtin_exit},
-		{"help", builtin_help},
-		{"cd", builtin_cd},
-		{"alias", builtin_alias},
-		{"env", builtin_env},
-		{"setenv", builtin_set_env},
-		{"unsetenv", builtin_unset_env},
+		{"exit", _exit},
+		{"help", _help},
+		{"cd", _cd},
+		{"alias", _alias},
+		{"env", _env},
+		{"setenv", set_env},
+		{"unsetenv", unset_env},
 		{NULL, NULL}
 	};
-
-	/*walk through the structure*/
-	for (iterator = 0; options[iterator].builtin != NULL; iterator++)
+	for (i = 0; options[i].builtin != NULL; i++)
 	{
-		/*if there is a match between the given command and a builtin,*/
-		if (str_compare(options[iterator].builtin, data->command, 0))
-		{
-			/*execute the function, and return the return value of the function*/
-			return (options[iterator].function(data));
-		}
-		/*if there is no match return -1 */
+		if (str_compare(options[i].builtin, data->command, 0))
+			return (options[i].function(data));
 	}
 	return (-1);
 }
