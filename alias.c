@@ -43,7 +43,7 @@ int alias_print(my_shell_info *data, char *alias)
  * @data: struct for the program's data
  * Return: zero on sucess
  */
-char *get_alias(my_shell_info *data, char *name)
+char *alias_get(my_shell_info *data, char *name)
 {
 	int i, alias_len;
 
@@ -81,7 +81,7 @@ int set_alias(char *alias_str, my_shell_info *data)
 			buffer[i] = alias_str[i];
 		else
 		{
-			temp = get_alias(data, alias_str + i + 1);
+			temp = alias_get(data, alias_str + i + 1);
 			break;
 		}
 	for (j = 0; data->alias_list[j]; j++)
