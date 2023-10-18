@@ -10,13 +10,13 @@ int _builtins(my_shell_info *data)
 {
 	int i;
 	builtins options[] = {
-		{"exit", _exit},
+		{"exit", my_exit},
 		{"help", _help},
 		{"cd", _cd},
 		{"alias", _alias},
-		{"env", _env},
-		{"setenv", set_env},
-		{"unsetenv", unset_env},
+		{"env", my_env},
+		{"setenv", my_set_env},
+		{"unsetenv", my_unset_env},
 		{NULL, NULL}
 	};
 	for (i = 0; options[i].builtin != NULL; i++)

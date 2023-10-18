@@ -5,7 +5,7 @@
  * @data: struct for the program's data
  * Return: zero on sucess
  */
-int _exit(my_shell_info *data)
+int my_exit(my_shell_info *data)
 {
 	int i;
 
@@ -120,10 +120,10 @@ int _help(my_shell_info *data)
 
 	for (i = 0; msg[i]; i++)
 	{
-		length = str_length(data->tokens[1]);
-		if (str_compare(data->tokens[1], msg[i], length))
+		len = str_length(data->tokens[1]);
+		if (str_compare(data->tokens[1], msg[i], len))
 		{
-			_print(msg[i] + length + 1);
+			_print(msg[i] + len + 1);
 			return (1);
 		}
 	}

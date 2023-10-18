@@ -105,7 +105,7 @@ char *_strcnt(char *str1, char *str2)
 		str2 = "";
 	len2 = _strlen(str2);
 
-	result = malloc(sizeof(char) * (len1 + len2 + 1));
+	conc = malloc(sizeof(char) * (len1 + len2 + 1));
 	if (conc == NULL)
 	{
 		errno = ENOMEM;

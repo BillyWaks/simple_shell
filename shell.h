@@ -60,7 +60,7 @@ typedef struct builtins
 
 /** _getline.c **/
 int _getline(my_shell_info *data);
-int check_logic_ops(char *array_commands[], int i, char array_operators[]);
+int logic_check(char *commands[], int i, char operators[]);
 
 /** main.c **/
 void inicialize_data(my_shell_info *data, int argc, char *argv[], char **env);
@@ -126,16 +126,16 @@ int execute(my_shell_info *data);
 int builtins_list(my_shell_info *data);
 
 /** builtin_commands.c **/
-int builtin_cd(my_shell_info *data);
-int set_work_directory(my_shell_info *data, char *new_dir);
-int builtin_help(my_shell_info *data);
-int builtin_alias(my_shell_info *data);
-int builtin_exit(my_shell_info *data);
+int _cd(my_shell_info *data);
+int set_wd(my_shell_info *data, char *curr_dir);
+int _help(my_shell_info *data);
+int _alias(my_shell_info *data);
+int my_exit(my_shell_info *data);
 
 /** builtins_env.c **/
-int builtin_env(my_shell_info *data);
-int builtin_set_env(my_shell_info *data);
-int builtin_unset_env(my_shell_info *data);
+int my_env(my_shell_info *data);
+int my_set_env(my_shell_info *data);
+int my_unset_env(my_shell_info *data);
 
 /** path.c **/
 int check_file(char *full_path);

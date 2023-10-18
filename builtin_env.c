@@ -5,7 +5,7 @@
  * @data: struct for the program's data
  * Return: zero on success
  */
-int _env(my_shell_info *data)
+int my_env(my_shell_info *data)
 {
 	int i;
 	char cpname[50] = {'\0'};
@@ -50,7 +50,7 @@ int _env(my_shell_info *data)
  * @data: struct for the program's data
  * Return: zero on sucess
  */
-int set_env(my_shell_info *data)
+int my_set_env(my_shell_info *data)
 {
 	if (data->tokens[1] == NULL || data->tokens[2] == NULL)
 		return (0);
@@ -69,7 +69,7 @@ int set_env(my_shell_info *data)
  * @data: struct for the program's data'
  * Return: 0 on success
  */
-int unset_env(my_shell_info *data)
+int my_unset_env(my_shell_info *data)
 {
 	if (data->tokens[1] == NULL)
 		return (0);
