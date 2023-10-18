@@ -9,6 +9,7 @@
 void inicialize_data(my_shell_info *data, int argc, char *argv[], char **env)
 {
         int i = 0;
+        my_shell_info data_struct = {NULL}, *data = &data_struct;
 
         data->program = argv[0];
         data->input_line = NULL;
