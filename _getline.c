@@ -26,7 +26,7 @@ int _getline(my_shell_info *data)
 			return (-1);
 		i = 0;
 		do {
-			commands[i] = str_duplicate(strtok(i ? NULL : buff, "\n;"));
+			commands[i] = _strdup(strtok(i ? NULL : buff, "\n;"));
 			i = logic_check(commands, i, operators);
 		} while (commands[i++]);
 	}
@@ -36,7 +36,7 @@ int _getline(my_shell_info *data)
 		commands[i] = commands[i + 1];
 		operators[i] = operators[i + 1];
 	}
-	return (str_length(data->input_line));
+	return (_strlen(data->input_line));
 }
 
 /**
@@ -58,8 +58,8 @@ int logic_check(char *commands[], int i, char operators[])
 		{
 			tmp = commands[i];
 			commands[i][j] = '\0';
-			commands[i] = str_duplicate(commands[i]);
-			commands[i + 1] = str_duplicate(tmp + j + 2);
+			commands[i] = _strdup(commands[i]);
+			commands[i + 1] = _strdup(tmp + j + 2);
 			i++;
 			operators[i] = '&';
 			free(tmp);
@@ -69,8 +69,8 @@ int logic_check(char *commands[], int i, char operators[])
 		{
 			tmp = commands[i];
 			commands[i][j] = '\0';
-			commands[i] = str_duplicate(commands[i]);
-			commands[i + 1] = str_duplicate(tmp + j + 2);
+			commands[i] = _strdup(commands[i]);
+			commands[i + 1] = _strdup(tmp + j + 2);
 			i++;
 			operators[i] = '|';
 			free(tmp);
