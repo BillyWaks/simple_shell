@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _exit - exit the program with error code
+ * my_exit - exit the program with error code
  * @data: struct for the program's data
  * Return: zero on sucess
  */

@@ -21,14 +21,16 @@
 
 /**
  * struct info- struct for the program's data
- * @program: the name of the executable
- * @input_line: pointer to the input read for _getline
- * @command: pointer to the first command typed by the user
+ * @program: the name of the executable file
+ * @input_line: pointer to the input read for access by _getline
+ * @command: pointer to the first command typed
  * @exec_counter: number of excecuted comands
- * @fd: file descriptor to the input of commands
+ * @fd: file descriptor to the input commands
  * @token: pointer to array of tokenized input
  * @tokens: pointer to array of tokenized input
  * @env: copy of the environ
+ * @array: list of characters stored in a buffer
+ * @prompt: pointer to a character which prints a prompt
  * @alias_list: array of pointers with aliases.
  */
 typedef struct info
@@ -78,7 +80,7 @@ int _print_error(int errorcode, my_shell_info *data);
 void expand_variables(my_shell_info *data);
 void expand_alias(my_shell_info *data);
 int execute(my_shell_info *data);
-int _strlen(char *string); 
+int _strlen(char *string);
 char *_strdup(char *string);
 
 /** strings.c **/
@@ -95,7 +97,7 @@ int alias_print(my_shell_info *data, char *alias);
 
 /** print.c **/
 int _print(char *string);
-int _printe(char *string); 
+int _printe(char *string);
 int _print_error(int errorcode, my_shell_info *data);
 
 /** convert_numbers.c **/

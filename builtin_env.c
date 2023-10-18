@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _env - shows the environment where the shell runs
+ * my_env - shows the environment where the shell runs
  * @data: struct for the program's data
  * Return: zero on success
  */
@@ -46,7 +46,7 @@ int my_env(my_shell_info *data)
 }
 
 /**
- * set_env - sets environment variables
+ * my_set_env - sets environment variables
  * @data: struct for the program's data
  * Return: zero on sucess
  */
@@ -65,7 +65,7 @@ int my_set_env(my_shell_info *data)
 }
 
 /**
- * unset_env - unsets environment variables
+ * my_unset_env - unsets environment variables
  * @data: struct for the program's data'
  * Return: 0 on success
  */
