@@ -31,7 +31,7 @@ int my_exit(my_shell_info *data)
  */
 int _cd(my_shell_info *data)
 {
-	char *home_dir = env_get_key("HOME", data), *prev_dr = NULL;
+	char *home_dir = get_key("HOME", data), *prev_dr = NULL;
 	char dir_prev[128] = {0};
 	int err_cd = 0;
 
@@ -39,10 +39,10 @@ int _cd(my_shell_info *data)
 	{
 		if (_strcmp(data->tokens[1], "-", 0))
 		{
-			prev_dr = env_get_key("OLDPWD", data);
+			prev_dr = get_key("OLDPWD", data);
 			if (prev_dr)
 				err_cd = set_wd(data, prev_dr);
-			_print(env_get_key("PWD", data));
+			_print(get_key("PWD", data));
 			_print("\n");
 
 			return (err_cd);
@@ -83,9 +83,9 @@ int set_wd(my_shell_info *data, char *curr_dir)
 			errno = 2;
 			return (3);
 		}
-		env_set_key("PWD", curr_dir, data);
+		set_key("PWD", curr_dir, data);
 	}
-	env_set_key("OLDPWD", dir_prev, data);
+	set_key("OLDPWD", dir_prev, data);
 	return (0);
 }
 
