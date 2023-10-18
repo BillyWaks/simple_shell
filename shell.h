@@ -90,8 +90,8 @@ char *_strcnt(char *string1, char *string2);
 
 /** alias.c **/
 int set_alias(char *alias_string, my_shell_info *data);
-char *get_alias(my_shell_info *data, char *alias);
-int print_alias(my_shell_info *data, char *alias);
+char *alias_get(my_shell_info *data, char *name);
+int alias_print(my_shell_info *data, char *alias);
 
 /** print.c **/
 int _print(char *string);
