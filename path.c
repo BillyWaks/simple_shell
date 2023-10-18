@@ -61,7 +61,7 @@ char **tokenize_path(my_shell_info *data)
 	char *PATH;
 
 	/* get the PATH value*/
-	PATH = env_get_key("PATH", data);
+	PATH = get_key("PATH", data);
 	if ((PATH == NULL) || PATH[0] == '\0')
 	{/*path not found*/
 		return (NULL);
