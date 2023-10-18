@@ -21,7 +21,7 @@ int _builtins(my_shell_info *data)
 	};
 	for (i = 0; options[i].builtin != NULL; i++)
 	{
-		if (str_compare(options[i].builtin, data->command, 0))
+		if (_strcmp(options[i].builtin, data->command, 0))
 			return (options[i].function(data));
 	}
 	return (-1);
