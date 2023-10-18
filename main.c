@@ -8,6 +8,7 @@
  */
 int main(int argc, char *argv[], char *env[])
 {
+	/* initialization */
 	my_shell_info data_struct = {NULL}, *data = &data_struct;
 	char *prompt = "";
 
@@ -97,6 +98,7 @@ void sisifo(char *prompt, my_shell_info *data)
 
 	while (++(data->exec_counter))
 	{
+		/* print the prompt */
 		_print(prompt);
 		error_code = string_len = _getline(data);
 
