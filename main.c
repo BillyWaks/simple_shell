@@ -108,7 +108,7 @@ void sisifo(char *prompt, my_shell_info *data)
                 {
                         expand_alias(data);
                         expand_variables(data);
-                        tokenize(data);
+                        str_tokenizer(data);
                         if (data->tokens[0])
                         { /* if a text is given to prompt, execute */
                                 error_code = execute(data);
