@@ -9,7 +9,7 @@ void str_tokenizer(my_shell_info *data)
 	char *delim = " \t";
 	int i, j, counter = 2, length;
 
-	length = str_length(data->input_line);
+	length = _strlen(data->input_line);
 	if (length)
 	{
 		if (data->input_line[length - 1] == '\n')
