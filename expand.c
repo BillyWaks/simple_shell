@@ -37,7 +37,7 @@ void expand_variables(my_shell_info *data)
 		{
 			for (j = 1; line[i + j] && line[i + j] != ' '; j++)
 				expansion[j - 1] = line[i + j];
-			temp = env_get_key(expansion, data);
+			temp = get_key(expansion, data);
 			line[i] = '\0', expansion[0] = '\0';
 			buffer_add(expansion, line + i + j);
 			temp ? buffer_add(line, temp) : 1;
