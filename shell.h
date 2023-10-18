@@ -124,7 +124,7 @@ char *_strtok(char *line, char *delim);
 int execute(my_shell_info *data);
 
 /** builtins_list.c **/
-int builtins_list(my_shell_info *data);
+int _builtins(my_shell_info *data);
 
 /** builtin_commands.c **/
 int _cd(my_shell_info *data);
