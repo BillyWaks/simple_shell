@@ -43,10 +43,10 @@ void expand_variables(my_shell_info *data)
 			temp ? buffer_add(line, temp) : 1;
 			buffer_add(line, expansion);
 		}
-	if (!str_compare(data->input_line, line, 0))
+	if (!_strcmp(data->input_line, line, 0))
 	{
 		free(data->input_line);
-		data->input_line = str_duplicate(line);
+		data->input_line = _strdup(line);
 	}
 }
 
@@ -72,14 +72,14 @@ void expand_alias(my_shell_info *data)
 			expansion[j] = line[i + j];
 		expansion[j] = '\0';
 
-		temp = get_alias(data, expansion);
+		temp = alias_get(data, expansion);
 		if (temp)
 		{
 			expansion[0] = '\0';
 			buffer_add(expansion, line + i + j);
 			line[i] = '\0';
 			buffer_add(line, temp);
-			line[str_length(line)] = '\0';
+			line[_strlen(line)] = '\0';
 			buffer_add(line, expansion);
 			was_expanded = 1;
 		}
@@ -88,7 +88,7 @@ void expand_alias(my_shell_info *data)
 	if (was_expanded)
 	{
 		free(data->input_line);
-		data->input_line = str_duplicate(line);
+		data->input_line = _strdup(line);
 	}
 }
 
@@ -102,7 +102,7 @@ int buffer_add(char *buffer, char *str_to_add)
 {
 	int length, i;
 
-	length = str_length(buffer);
+	length = _strlen(buffer);
 	for (i = 0; str_to_add[i]; i++)
 	{
 		buffer[length + i] = str_to_add[i];
