@@ -78,15 +78,15 @@ int _print_error(int errorcode, my_shell_info *data);
 void expand_variables(my_shell_info *data);
 void expand_alias(my_shell_info *data);
 int execute(my_shell_info *data);
-int str_length(char *string); 
-char *str_duplicate(char *string);
+int _strlen(char *string); 
+char *_strdup(char *string);
 
 /** strings.c **/
-int str_compare(char *string1, char *string2, int number);
-int str_length(char *string);
-char *str_duplicate(char *string);
-void str_reverse(char *string);
-char *str_concat(char *string1, char *string2);
+int _strcmp(char *string1, char *string2, int number);
+int _strlen(char *string);
+char *_strdup(char *string);
+void _strrev(char *string);
+char *_strcnt(char *string1, char *string2);
 
 /** alias.c **/
 int set_alias(char *alias_string, my_shell_info *data);
