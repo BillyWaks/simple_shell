@@ -114,7 +114,7 @@ int env_remove_key(char *key, my_shell_info *data);
 void print_environ(my_shell_info *data);
 
 /** tokenize.c **/
-void tokenize(my_shell_info *data);
+void str_tokenizer(my_shell_info *data);
 
 /** strtok.c **/
 char *_strtok(char *line, char *delim);
