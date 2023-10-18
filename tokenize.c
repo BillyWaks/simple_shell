@@ -30,10 +30,10 @@ void str_tokenizer(my_shell_info *data)
 		exit(errno);
 	}
 	i = 0;
-	data->tokens[i] = str_duplicate(_strtok(data->input_line, delim));
-	data->command = str_duplicate(data->tokens[0]);
+	data->tokens[i] = _strdup(_strtok(data->input_line, delim));
+	data->command = _strdup(data->tokens[0]);
 	while (data->tokens[i++])
 	{
-		data->tokens[i] = str_duplicate(_strtok(NULL, delim));
+		data->tokens[i] = _strdup(_strtok(NULL, delim));
 	}
 }
