@@ -19,7 +19,7 @@ int my_env(my_shell_info *data)
 		{
 			if (data->tokens[1][i] == '=')
 			{
-				var_cpy = str_duplicate(env_get_key(cpname, data));
+				var_cpy = _strdup(env_get_key(cpname, data));
 				if (var_cpy != NULL)
 					env_set_key(cpname, data->tokens[1] + i + 1, data);
 
