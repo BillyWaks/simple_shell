@@ -12,26 +12,26 @@ int my_env(my_shell_info *data)
 	char *var_cpy = NULL;
 
 	if (data->tokens[1] == NULL)
-		print_environ(data);
+		print_env(data);
 	else
 	{
 		for (i = 0; data->tokens[1][i]; i++)
 		{
 			if (data->tokens[1][i] == '=')
 			{
-				var_cpy = _strdup(env_get_key(cpname, data));
+				var_cpy = _strdup(get_key(cpname, data));
 				if (var_cpy != NULL)
-					env_set_key(cpname, data->tokens[1] + i + 1, data);
+					set_key(cpname, data->tokens[1] + i + 1, data);
 
-				print_environ(data);
-				if (env_get_key(cpname, data) == NULL)
+				print_env(data);
+				if (get_key(cpname, data) == NULL)
 				{
 					_print(data->tokens[1]);
 					_print("\n");
 				}
 				else
 				{
-					env_set_key(cpname, var_cpy, data);
+					set_key(cpname, var_cpy, data);
 					free(var_cpy);
 				}
 				return (0);
@@ -60,7 +60,7 @@ int my_set_env(my_shell_info *data)
 		perror(data->command);
 		return (5);
 	}
-	env_set_key(data->tokens[1], data->tokens[2], data);
+	set_key(data->tokens[1], data->tokens[2], data);
 	return (0);
 }
 
@@ -79,7 +79,7 @@ int my_unset_env(my_shell_info *data)
 		perror(data->command);
 		return (5);
 	}
-	env_remove_key(data->tokens[1], data);
+	env_remkey(data->tokens[1], data);
 
 	return (0);
 }
