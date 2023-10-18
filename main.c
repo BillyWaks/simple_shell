@@ -73,7 +73,7 @@ void inicialize_data(my_shell_info *data, int argc, char *argv[], char **env)
         {
                 for (; env[i]; i++)
                 {
-                        data->env[i] = str_duplicate(env[i]);
+                        data->env[i] = _strdup(env[i]);
                 }
         }
         data->env[i] = NULL;
