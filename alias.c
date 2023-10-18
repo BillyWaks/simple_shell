@@ -13,10 +13,10 @@ int alias_print(my_shell_info *data, char *alias)
 
 	if (data->alias_list)
 	{
-		alias_len = str_length(alias);
+		alias_len = _strlen(alias);
 		for (i = 0; data->alias_list[i]; i++)
 		{
-			if (!alias || (str_compare(data->alias_list[i], alias, alias_len)
+			if (!alias || (_strcmp(data->alias_list[i], alias, alias_len)
 						&&	data->alias_list[i][alias_len] == '='))
 			{
 				for (j = 0; data->alias_list[i][j]; j++)
@@ -50,11 +50,11 @@ char *alias_get(my_shell_info *data, char *name)
 	if (name == NULL || data->alias_list == NULL)
 		return (NULL);
 
-	alias_len = str_length(name);
+	alias_len = _strlen(name);
 
 	for (i = 0; data->alias_list[i]; i++)
 	{
-		if (str_compare(name, data->alias_list[i], alias_len) &&
+		if (_strcmp(name, data->alias_list[i], alias_len) &&
 				data->alias_list[i][alias_len] == '=')
 		{
 			return (data->alias_list[i] + alias_len + 1);
@@ -85,7 +85,7 @@ int set_alias(char *alias_str, my_shell_info *data)
 			break;
 		}
 	for (j = 0; data->alias_list[j]; j++)
-		if (str_compare(buffer, data->alias_list[j], i) &&
+		if (_strcmp(buffer, data->alias_list[j], i) &&
 				data->alias_list[j][i] == '=')
 		{
 			free(data->alias_list[j]);
@@ -95,9 +95,9 @@ int set_alias(char *alias_str, my_shell_info *data)
 	{
 		buffer_add(buffer, "=");
 		buffer_add(buffer, temp);
-		data->alias_list[j] = str_duplicate(buffer);
+		data->alias_list[j] = _strdup(buffer);
 	}
 	else
-		data->alias_list[j] = str_duplicate(alias_str);
+		data->alias_list[j] = _strdup(alias_str);
 	return (0);
 }
