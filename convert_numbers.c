@@ -2,33 +2,33 @@
 
 /**
  * long_to_string - converts a number to a string.
- * @number: number to be converten in an string.
- * @string: buffer to save the number as string.
- * @base: base to convert number
+ * @number: number to be converted into a string.
+ * @string: buffer to save the number in string format
+ * @base: the base of the number
  *
  * Return: Nothing.
  */
 void long_to_string(long number, char *string, int base)
 {
-	int index = 0, ifNegative = 0;
-	long cociente = number;
+	int index = 0, if_neg = 0;
+	long num = number;
 	char letters[] = {"0123456789abcdef"};
 
-	if (cociente == 0)
+	if (num == 0)
 		string[index++] = '0';
 
 	if (string[0] == '-')
-		ifNegative = 1;
+		if_neg = 1;
 
-	while (cociente)
+	while (num)
 	{
-		if (cociente < 0)
-			string[index++] = letters[-(cociente % base)];
+		if (num < 0)
+			string[index++] = letters[-(num % base)];
 		else
-			string[index++] = letters[cociente % base];
-		cociente /= base;
+			string[index++] = letters[num % base];
+		num /= base;
 	}
-	if (ifNegative)
+	if (if_neg)
 		string[index++] = '-';
 
 	string[index] = '\0';
@@ -37,16 +37,15 @@ void long_to_string(long number, char *string, int base)
 
 
 /**
- * _atoi - convert a string to an integer.
+ * _atoi - converts a string to an integer.
  *
- * @s: pointer to str origen.
- * Return: int of string or 0.
+ * @s: pointer to str input.
+ * Return: integer value for the string
  */
 int _atoi(char *s)
 {
 	int sign = 1;
 	unsigned int number = 0;
-	/*1- analisys sign*/
 	while (!('0' <= *s && *s <= '9') && *s != '\0')
 	{
 		if (*s == '-')
@@ -56,7 +55,6 @@ int _atoi(char *s)
 		s++;
 	}
 
-	/*2 - extract the number */
 	while ('0' <= *s && *s <= '9' && *s != '\0')
 	{
 
