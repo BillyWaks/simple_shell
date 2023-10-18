@@ -15,11 +15,11 @@ char *env_get_key(char *key, my_shell_info *data)
 		return (NULL);
 
 	/* obtains the leng of the variable requested */
-	key_length = str_length(key);
+	key_length = _strlen(key);
 
 	for (i = 0; data->env[i]; i++)
 	{/* Iterates through the environ and check for coincidence of the vame */
-		if (str_compare(key, data->env[i], key_length) &&
+		if (_strcmp(key, data->env[i], key_length) &&
 				data->env[i][key_length] == '=')
 		{/* returns the value of the key NAME=  when find it*/
 			return (data->env[i] + key_length + 1);
@@ -47,11 +47,11 @@ int env_set_key(char *key, char *value, my_shell_info *data)
 		return (1);
 
 	/* obtains the leng of the variable requested */
-	key_length = str_length(key);
+	key_length = _strlen(key);
 
 	for (i = 0; data->env[i]; i++)
 	{/* Iterates through the environ and check for coincidence of the vame */
-		if (str_compare(key, data->env[i], key_length) &&
+		if (_strcmp(key, data->env[i], key_length) &&
 				data->env[i][key_length] == '=')
 		{/* If key already exists */
 			is_new_key = 0;
@@ -61,8 +61,8 @@ int env_set_key(char *key, char *value, my_shell_info *data)
 		}
 	}
 	/* make an string of the form key=value */
-	data->env[i] = str_concat(str_duplicate(key), "=");
-	data->env[i] = str_concat(data->env[i], value);
+	data->env[i] = _strcnt(_strdup(key), "=");
+	data->env[i] = _strcnt(data->env[i], value);
 
 	if (is_new_key)
 	{/* if the variable is new, it is create at end of actual list and we need*/
@@ -87,11 +87,11 @@ int env_remove_key(char *key, my_shell_info *data)
 		return (0);
 
 	/* obtains the leng of the variable requested */
-	key_length = str_length(key);
+	key_length = _strlen(key);
 
 	for (i = 0; data->env[i]; i++)
 	{/* iterates through the environ and checks for coincidences */
-		if (str_compare(key, data->env[i], key_length) &&
+		if (_strcmp(key, data->env[i], key_length) &&
 				data->env[i][key_length] == '=')
 		{/* if key already exists, remove them */
 			free(data->env[i]);
