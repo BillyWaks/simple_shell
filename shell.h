@@ -109,10 +109,10 @@ void expand_alias(my_shell_info *data);
 int buffer_add(char *buffer, char *str_to_add);
 
 /** manage_env.c **/
-char *env_get_key(char *key, my_shell_info *data);
-int env_set_key(char *key, char *value, my_shell_info *data);
-int env_remove_key(char *key, my_shell_info *data);
-void print_environ(my_shell_info *data);
+char *get_key(char *key, my_shell_info *data);
+int set_key(char *key, char *value, my_shell_info *data);
+int env_remkey(char *key, my_shell_info *data);
+void print_env(my_shell_info *data);
 
 /** tokenize.c **/
 void str_tokenizer(my_shell_info *data);
