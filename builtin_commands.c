@@ -37,7 +37,7 @@ int _cd(my_shell_info *data)
 
 	if (data->tokens[1])
 	{
-		if (str_compare(data->tokens[1], "-", 0))
+		if (_strcmp(data->tokens[1], "-", 0))
 		{
 			prev_dr = env_get_key("OLDPWD", data);
 			if (prev_dr)
@@ -75,7 +75,7 @@ int set_wd(my_shell_info *data, char *curr_dir)
 
 	getcwd(dir_prev, 128);
 
-	if (!str_compare(dir_prev, curr_dir, 0))
+	if (!_strcmp(dir_prev, curr_dir, 0))
 	{
 		err_code = chdir(curr_dir);
 		if (err_code == -1)
@@ -120,8 +120,8 @@ int _help(my_shell_info *data)
 
 	for (i = 0; msg[i]; i++)
 	{
-		len = str_length(data->tokens[1]);
-		if (str_compare(data->tokens[1], msg[i], len))
+		len = _strlen(data->tokens[1]);
+		if (_strcmp(data->tokens[1], msg[i], len))
 		{
 			_print(msg[i] + len + 1);
 			return (1);
@@ -142,14 +142,14 @@ int _alias(my_shell_info *data)
 	int i = 0;
 
 	if (data->tokens[1] == NULL)
-		return (print_alias(data, NULL));
+		return (alias_print(data, NULL));
 
 	while (data->tokens[++i])
 	{
 		if (count_characters(data->tokens[i], "="))
 			set_alias(data->tokens[i], data);
 		else
-			print_alias(data, data->tokens[i]);
+			alias_print(data, data->tokens[i]);
 	}
 	return (0);
 }
