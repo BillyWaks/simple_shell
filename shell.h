@@ -21,11 +21,12 @@
 
 /**
  * struct info- struct for the program's data
- * @program_name: the name of the executable
+ * @program: the name of the executable
  * @input_line: pointer to the input read for _getline
- * @command_name: pointer to the first command typed by the user
+ * @command: pointer to the first command typed by the user
  * @exec_counter: number of excecuted comands
- * @file_des: file descriptor to the input of commands
+ * @fd: file descriptor to the input of commands
+ * @token: pointer to array of tokenized input
  * @tokens: pointer to array of tokenized input
  * @env: copy of the environ
  * @alias_list: array of pointers with aliases.
@@ -40,7 +41,7 @@ typedef struct info
 	int fd;
 	char *token;
 	char **tokens;
-	char ***array;
+	char **array;
 	char **env;
 	char **alias_list;
 } my_shell_info;
