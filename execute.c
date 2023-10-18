@@ -10,7 +10,7 @@ int execute(my_shell_info *data)
 	pid_t pidd;
 
 	/* check for program in built ins */
-	retval = builtins_list(data);
+	retval = _builtins(data);
 	if (retval != -1)/* if program was found in built ins */
 		return (retval);
 
